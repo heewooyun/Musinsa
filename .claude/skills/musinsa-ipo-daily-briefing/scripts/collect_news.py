@@ -168,10 +168,15 @@ def main() -> int:
         "count": len(items),
         "items": items,
     }
+    summary = {k: result[k] for k in ("window", "sources_ok", "sources_failed", "count")}
+    if not ok:
+        # Write nothing: an empty candidates.json would look like real runner input on a re-run.
+        print(json.dumps(summary | {"written": False}, ensure_ascii=False))
+        return 4
     Path(args.out).parent.mkdir(parents=True, exist_ok=True)
     Path(args.out).write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(json.dumps({k: result[k] for k in ("window", "sources_ok", "sources_failed", "count")}, ensure_ascii=False))
-    return 0 if ok else 4
+    print(json.dumps(summary | {"written": args.out}, ensure_ascii=False))
+    return 0
 
 
 if __name__ == "__main__":
