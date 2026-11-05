@@ -1,0 +1,105 @@
+# 무신사 장외일보 — 발송
+#
+# Claude Code 예약 작업(화~금 06:10 KST)이 archive/YYYY-MM-DD/newsletter.html 을 커밋·push하면
+# 이 워크플로가 그 호를 07:00 KST에 메일로 보낸다. 새로 추가된 호만 보내고, 이미 보낸 호를 고친 커밋은 다시 보내지 않는다.
+#
+# 필요한 저장소 Secrets (Settings → Secrets and variables → Actions). 값은 암호화되어 공개 레포에서도 보이지 않고,
+# 로그에도 *** 로 가려진다. 주소를 파일에 적지 말고 여기에만 둔다.
+#   NEWSLETTER_TO        받는 주소
+#   GMAIL_ADDRESS        보내는 Gmail 주소
+#   GMAIL_APP_PASSWORD   보내는 Gmail 계정의 '앱 비밀번호'(16자리, 계정 비밀번호 아님)
+#   (대신) RESEND_API_KEY
+#
+# 손으로 다시 보내기: Actions → "무신사 장외일보 발송" → Run workflow → 날짜(예: 2026-11-05) 입력.
+
+name: 무신사 장외일보 발송
+
+on:
+  push:
+    paths:
+      - 'archive/*/newsletter.html'
+  workflow_dispatch:
+    inputs:
+      date:
+        description: '보낼 호의 날짜 (archive/<날짜>/newsletter.html), 예: 2026-11-05'
+        required: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: musinsa-send
+  cancel-in-progress: false
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    timeout-minutes: 100
+    env:
+      TZ: Asia/Seoul
+      SKILL_DIR: .claude/skills/musinsa-ipo-daily-briefing
+    steps:
+      - name: Check mail settings
+        id: cfg
+        env:
+          HAS_MAIL: ${{ (secrets.GMAIL_ADDRESS != '' && secrets.GMAIL_APP_PASSWORD != '') || secrets.RESEND_API_KEY != '' }}
+          HAS_TO: ${{ secrets.NEWSLETTER_TO != '' }}
+        run: |
+          if [ "$HAS_MAIL" = "true" ] && [ "$HAS_TO" = "true" ]; then
+            echo "ok=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ok=false" >> "$GITHUB_OUTPUT"
+            {
+              echo "## 메일 설정이 필요합니다"
+              echo "- 보내는 메일(GMAIL_ADDRESS+GMAIL_APP_PASSWORD 또는 RESEND_API_KEY): $HAS_MAIL"
+              echo "- 받는 주소(NEWSLETTER_TO): $HAS_TO"
+              echo ""
+              echo "README의 '메일 설정'을 따라 Secrets를 등록한 뒤 이 워크플로를 날짜를 넣어 다시 실행하세요."
+            } >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - uses: actions/checkout@v4
+        if: steps.cfg.outputs.ok == 'true'
+        with:
+          fetch-depth: 0
+
+      - name: Find the issue to send
+        id: pick
+        if: steps.cfg.outputs.ok == 'true'
+        env:
+          INPUT_DATE: ${{ inputs.date }}
+          BEFORE: ${{ github.event.before }}
+          AFTER: ${{ github.sha }}
+        run: |
+          pattern='^archive/[0-9]{4}-[0-9]{2}-[0-9]{2}/newsletter\.html$'
+          if [ -n "$INPUT_DATE" ]; then
+            f="archive/$INPUT_DATE/newsletter.html"
+          elif [ -z "$BEFORE" ] || [ "$BEFORE" = "0000000000000000000000000000000000000000" ] || ! git cat-file -e "$BEFORE^{commit}" 2>/dev/null; then
+            f=$(git diff-tree --no-commit-id --name-only --diff-filter=A -r "$AFTER" | grep -E "$pattern" | sort | tail -1 || true)
+          else
+            f=$(git diff --name-only --diff-filter=A "$BEFORE" "$AFTER" | grep -E "$pattern" | sort | tail -1 || true)
+          fi
+          if [ -z "$f" ] || [ ! -f "$f" ]; then
+            echo "보낼 새 호가 없습니다(이미 보낸 호의 수정이거나 파일이 없음)." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          dir=$(dirname "$f")
+          echo "dir=$dir" >> "$GITHUB_OUTPUT"
+          echo "date=$(basename "$dir")" >> "$GITHUB_OUTPUT"
+
+      - name: Send (waits until 07:00 KST for today's issue)
+        if: steps.pick.outputs.dir != ''
+        env:
+          NEWSLETTER_TO: ${{ secrets.NEWSLETTER_TO }}
+          GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          DIR: ${{ steps.pick.outputs.dir }}
+          ISSUE_DATE: ${{ steps.pick.outputs.date }}
+        run: |
+          wait_args=()
+          if [ "${{ github.event_name }}" = "push" ] && [ "$ISSUE_DATE" = "$(date +%F)" ]; then wait_args=(--wait-until 07:00); fi
+          python3 "$SKILL_DIR/scripts/send_email.py" \
+            --html "$DIR/newsletter.html" --text "$DIR/newsletter.txt" --subject-file "$DIR/subject.txt" \
+            "${wait_args[@]}"
+          echo "## 발송: $(cat "$DIR/subject.txt")" >> "$GITHUB_STEP_SUMMARY"

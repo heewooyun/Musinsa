@@ -45,6 +45,15 @@ def log(**kw) -> None:
     print(json.dumps(kw, ensure_ascii=False))
 
 
+def mask(addr: str | None) -> str:
+    """Hide mail addresses in logs (public Actions logs): heewoo@example.com -> h***@e***.com"""
+    if not addr or "@" not in addr:
+        return "***"
+    user, _, domain = addr.strip().partition("@")
+    host, _, tld = domain.rpartition(".")
+    return f"{user[:1]}***@{(host or domain)[:1]}***{('.' + tld) if host else ''}"
+
+
 def wait_until(hhmm: str) -> None:
     """Sleep until HH:MM KST today if that moment is ahead of us and within MAX_WAIT_MINUTES."""
     h, m = (int(x) for x in hhmm.split(":"))
@@ -148,7 +157,7 @@ def main() -> int:
         log(sent=False, error="메일 자격증명이 없습니다: RESEND_API_KEY 또는 GMAIL_ADDRESS+GMAIL_APP_PASSWORD를 설정하세요.")
         return 2
     if args.dry_run:
-        log(sent=False, dry_run=True, backend=backend, to=args.to, subject=subject, html_bytes=len(html.encode()))
+        log(sent=False, dry_run=True, backend=backend, to=mask(args.to), subject=subject, html_bytes=len(html.encode()))
         return 0
     if args.wait_until:
         wait_until(args.wait_until)
@@ -158,8 +167,8 @@ def main() -> int:
     for attempt in range(1, 4):
         try:
             msg_id = sender_fn(args.to, subject, html, text)
-            log(sent=True, backend=backend, to=args.to, subject=subject, id=msg_id,
-                at=dt.datetime.now(KST).strftime("%Y-%m-%d %H:%M:%S KST"))
+            log(sent=True, backend=backend, to=mask(args.to), subject=subject,
+                at=dt.datetime.now(KST).strftime("%Y-%m-%d %H:%M:%S KST"))  # message id omitted: it contains the sender domain
             return 0
         except urllib.error.HTTPError as e:
             detail = e.read().decode(errors="replace")[:300]

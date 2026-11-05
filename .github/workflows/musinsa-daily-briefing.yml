@@ -1,4 +1,8 @@
-# 무신사 장외일보 — 매일 아침 생성하고 07:00 KST에 메일로 보낸다.
+# 무신사 장외일보 — (대체 경로) GitHub Actions 안에서 직접 생성하고 메일로 보낸다. 손으로 실행할 때만 돈다.
+#
+# 평소에는 Claude Code 예약 작업(화~금 06:10 KST)이 생성하고 send-newsletter.yml 이 발송한다.
+# 이 워크플로는 Claude Code 예약 작업 대신 GitHub에서 생성하고 싶을 때 쓰는 대체 경로다(Claude 인증 Secret 필요).
+# 정기 실행으로 바꾸려면 아래 schedule 주석을 풀고 예약 작업은 끈다(둘 다 켜면 메일이 두 번 온다).
 #
 # 필요한 저장소 Secrets (Settings → Secrets and variables → Actions):
 #   NEWSLETTER_TO            받는 주소 (공개 레포이므로 주소를 파일에 적지 않고 여기에 둔다)
@@ -9,15 +13,14 @@
 #   RESEND_API_KEY           (대신) Resend API 키                                  ─┘
 #   NAVER_CLIENT_ID / NAVER_CLIENT_SECRET  (선택) 네이버 뉴스 검색 API — 수집 품질 향상
 #
-# Secrets가 아직 없으면 실패하지 않고 "설정이 필요합니다"만 남기고 끝난다(매일 실패 알림 메일 방지).
-# 예약 실행은 기본 브랜치에 있는 이 파일로만 동작한다.
+# Secrets가 아직 없으면 실패하지 않고 "설정이 필요합니다"만 남기고 끝난다.
 
-name: 무신사 장외일보
+name: 무신사 장외일보 (GitHub에서 직접 생성)
 
 on:
-  schedule:
-    # GitHub cron은 UTC. 21:10 UTC = 06:10 KST. 생성에 20~40분, 발송 단계가 07:00 KST까지 기다렸다 보낸다.
-    - cron: '10 21 * * *'
+  # schedule:
+  #   # GitHub cron은 UTC. 화~금 06:10 KST = 월~목 21:10 UTC.
+  #   - cron: '10 21 * * 1-4'
   workflow_dispatch:
     inputs:
       send:
