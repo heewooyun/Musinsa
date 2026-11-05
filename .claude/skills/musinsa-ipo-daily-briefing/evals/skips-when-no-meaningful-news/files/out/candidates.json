@@ -1,0 +1,80 @@
+{
+  "_note": "평가용 가상 데이터입니다. 실제 보도가 아니며 URL은 example.com입니다.",
+  "window": {
+    "since_kst": "2026-11-07 06:10",
+    "until_kst": "2026-11-08 06:10"
+  },
+  "sources_ok": [
+    "fixture"
+  ],
+  "sources_failed": {},
+  "count": 6,
+  "items": [
+    {
+      "fixture_id": "S1",
+      "title": "무신사 '무진장 블프' 마지막 주말…인기 브랜드 품절 행진",
+      "outlet": "예시라이프",
+      "published_kst": "2026-11-07 10:00",
+      "url": "https://news.example.com/b1",
+      "original_url": null,
+      "snippet": "무신사 블랙프라이데이 행사가 마지막 주말을 맞았다. 인기 브랜드 패딩과 니트가 잇따라 품절됐고 추가 쿠폰이 풀렸다.",
+      "query": "fixture",
+      "via": "fixture"
+    },
+    {
+      "fixture_id": "S2",
+      "title": "무신사 스탠다드 x 예시브랜드 협업 컬렉션 발매",
+      "outlet": "예시패션",
+      "published_kst": "2026-11-07 14:00",
+      "url": "https://news.example.com/b2",
+      "original_url": null,
+      "snippet": "무신사 스탠다드가 예시브랜드와 협업한 한정판 컬렉션을 발매했다. 래플 응모는 무신사 앱에서 진행된다.",
+      "query": "fixture",
+      "via": "fixture"
+    },
+    {
+      "fixture_id": "S3",
+      "title": "무신사 배송 지연 공지…주문 물량 몰려",
+      "outlet": "예시소비자뉴스",
+      "published_kst": "2026-11-07 19:00",
+      "url": "https://news.example.com/b3",
+      "original_url": null,
+      "snippet": "무신사가 앱 공지를 통해 행사 기간 주문이 몰려 일부 상품 배송이 늦어질 수 있다고 안내했다.",
+      "query": "fixture",
+      "via": "fixture"
+    },
+    {
+      "fixture_id": "S4",
+      "title": "무신사, 코스피 상장예비심사 청구…공모 2,660만주",
+      "outlet": "예시경제",
+      "published_kst": "2026-09-07 18:16",
+      "url": "https://news.example.com/b4",
+      "original_url": null,
+      "snippet": "무신사가 한국거래소에 유가증권시장 상장예비심사를 청구했다. 상장 예정 주식은 2억 2,783만 주, 공모 주식은 2,660만 주다.",
+      "query": "fixture",
+      "via": "fixture"
+    },
+    {
+      "fixture_id": "S5",
+      "title": "[커뮤니티] 무신사 상장 언제 하나요? 기다리다 지침",
+      "outlet": "비상장 커뮤니티(예시)",
+      "published_kst": "2026-11-07 23:00",
+      "url": "https://news.example.com/b5",
+      "original_url": null,
+      "snippet": "무신사 상장 소식 아시는 분? 예심 결과 기다리다 지치네요. 다들 언제쯤으로 보세요?",
+      "query": "fixture",
+      "via": "fixture"
+    },
+    {
+      "fixture_id": "S6",
+      "title": "이번 주 무신사 인기 상품 랭킹 TOP10",
+      "outlet": "예시트렌드",
+      "published_kst": "2026-11-07 09:00",
+      "url": "https://news.example.com/b6",
+      "original_url": null,
+      "snippet": "이번 주 무신사에서 가장 많이 팔린 상품은 경량 패딩이었다. 니트와 카고 팬츠가 뒤를 이었다.",
+      "query": "fixture",
+      "via": "fixture"
+    }
+  ]
+}
