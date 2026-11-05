@@ -178,6 +178,11 @@ def validate(d: dict) -> tuple[list[str], list[str]]:
         for key in ("label", "value", "basis"):
             if not str(p.get(key) or "").strip():
                 errors.append(f"predictions[{i}].{key}: 비어 있습니다(예측에는 반드시 근거가 붙어야 합니다).")
+        if char_count(p.get("basis")) > 120:
+            warnings.append(f"predictions[{i}].basis: {char_count(p.get('basis'))}자 — 핵심 가정만 120자 이내로(계산 과정은 토론 로그에).")
+    for i, q in enumerate(d.get("qa") or [], start=1):
+        if char_count(q.get("a")) > 200:
+            warnings.append(f"qa[{i}].a: {char_count(q.get('a'))}자 — 200자 이내를 권장합니다.")
 
     for i, s in enumerate(d.get("snapshot") or [], start=1):
         if not s.get("label") or not s.get("value"):
@@ -294,7 +299,7 @@ def build(d: dict):
             if s.get("change"):
                 line += f" ({s['change']})"
             if s.get("is_estimate"):
-                line += " [예측]"
+                line += " [추정]"
             if s.get("note"):
                 line += f" — {s['note']}"
             t.append(line)

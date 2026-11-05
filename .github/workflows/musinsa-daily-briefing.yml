@@ -84,8 +84,8 @@ jobs:
             .claude/skills/musinsa-ipo-daily-briefing/SKILL.md 를 읽고 그 절차대로 오늘자 '무신사 장외일보'를 만들어 줘.
             - 실행 모드: 생성 전용. 메일은 보내지 마. 발송은 다음 워크플로 단계가 맡아.
             - 결과 파일은 out/ 에 저장해. out/candidates.json 이 있으면 후보 목록으로 써.
-            - 지난 발행본은 archive/ 에 있어. 발행하면 Step 9대로 archive/YYYY-MM-DD/ 에 복사해.
-            - 새 소식이 없으면 out/SKIPPED.md 만 남기고 끝내.
+            - 지난 기록은 archive/ 에 있어. 발행한 날도 쉬는 날도 Step 9대로 archive/YYYY-MM-DD/ 에 보관해.
+            - 새 소식이 없거나 수집이 불완전하면 발행하지 말고 out/SKIPPED.md 를 남겨.
           claude_args: |
             --max-turns 150
             --allowedTools "Skill,WebSearch,WebFetch,Read,Write,Edit,Glob,Grep,Bash(python3:*),Bash(mkdir:*),Bash(cp:*),Bash(ls:*),Bash(cat:*),Bash(date:*),Bash(TZ=Asia/Seoul date:*)"

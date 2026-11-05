@@ -86,7 +86,7 @@
       {%- for s in row %}
         <td class="stack" width="50%" valign="top" style="padding:0 {{ '5px' if loop.first else '0' }} 10px {{ '0' if loop.first else '5px' }};">
           <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:{{ c.tile }};border-radius:12px;"><tr><td style="padding:14px 16px;font-family:{{ font }};">
-            <div style="font-size:12px;line-height:1.5;color:{{ c.sub }};">{{ s.label }}{% if s.is_estimate %} {{ est_badge() }}{% endif %}</div>
+            <div style="font-size:12px;line-height:1.5;color:{{ c.sub }};">{{ s.label }}{% if s.is_estimate %} {{ est_badge('추정') }}{% endif %}</div>
             <div style="margin-top:4px;font-size:20px;line-height:1.3;font-weight:800;color:{{ c.ink }};">{{ s.value }}</div>
             {%- if s.change %}
             <div style="margin-top:2px;font-size:13px;font-weight:700;color:{{ c.up if s.change_dir == 'up' else (c.down if s.change_dir == 'down' else c.sub) }};">{{ '▲' if s.change_dir == 'up' else ('▼' if s.change_dir == 'down' else '–') }} {{ s.change }}</div>
