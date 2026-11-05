@@ -9,6 +9,7 @@
 #   RESEND_API_KEY           (대신) Resend API 키                                  ─┘
 #   NAVER_CLIENT_ID / NAVER_CLIENT_SECRET  (선택) 네이버 뉴스 검색 API — 수집 품질 향상
 #
+# Secrets가 아직 없으면 실패하지 않고 "설정이 필요합니다"만 남기고 끝난다(매일 실패 알림 메일 방지).
 # 예약 실행은 기본 브랜치에 있는 이 파일로만 동작한다.
 
 name: 무신사 장외일보
@@ -39,17 +40,41 @@ jobs:
       TZ: Asia/Seoul
       SKILL_DIR: .claude/skills/musinsa-ipo-daily-briefing
     steps:
+      - name: Check configuration
+        id: cfg
+        env:
+          HAS_CLAUDE: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN != '' || secrets.ANTHROPIC_API_KEY != '' }}
+          HAS_MAIL: ${{ (secrets.GMAIL_ADDRESS != '' && secrets.GMAIL_APP_PASSWORD != '') || secrets.RESEND_API_KEY != '' }}
+          HAS_TO: ${{ secrets.NEWSLETTER_TO != '' }}
+        run: |
+          echo "generate=$HAS_CLAUDE" >> "$GITHUB_OUTPUT"
+          if [ "$HAS_MAIL" = "true" ] && [ "$HAS_TO" = "true" ]; then echo "send=true" >> "$GITHUB_OUTPUT"; else echo "send=false" >> "$GITHUB_OUTPUT"; fi
+          if [ "$HAS_CLAUDE" != "true" ] || [ "$HAS_MAIL" != "true" ] || [ "$HAS_TO" != "true" ]; then
+            {
+              echo "## 설정이 필요합니다"
+              echo "- Claude 인증(CLAUDE_CODE_OAUTH_TOKEN 또는 ANTHROPIC_API_KEY): $HAS_CLAUDE"
+              echo "- 메일 자격증명(GMAIL_ADDRESS+GMAIL_APP_PASSWORD 또는 RESEND_API_KEY): $HAS_MAIL"
+              echo "- 받는 주소(NEWSLETTER_TO): $HAS_TO"
+              echo ""
+              echo "README의 '매일 07:00 메일 받기'를 참고해 Secrets를 등록하세요."
+            } >> "$GITHUB_STEP_SUMMARY"
+          fi
+
       - uses: actions/checkout@v4
+        if: steps.cfg.outputs.generate == 'true'
 
       - uses: actions/setup-python@v5
+        if: steps.cfg.outputs.generate == 'true'
         with:
           python-version: '3.12'
 
       - name: Install dependencies
+        if: steps.cfg.outputs.generate == 'true'
         run: pip install jinja2
 
-      # 지난 발행본은 레포에 커밋하지 않고(공개 레포) Actions 캐시에만 보관한다.
+      # 지난 기록은 레포에 커밋하지 않고(공개 레포) Actions 캐시에만 보관한다.
       - name: Restore archive
+        if: steps.cfg.outputs.generate == 'true'
         uses: actions/cache/restore@v4
         with:
           path: archive
@@ -57,6 +82,7 @@ jobs:
           restore-keys: musinsa-archive-
 
       - name: Prepare folders and prune archive (keep 30 days)
+        if: steps.cfg.outputs.generate == 'true'
         run: |
           mkdir -p out archive
           cutoff=$(date -d '30 days ago' +%F)
@@ -67,6 +93,7 @@ jobs:
           done
 
       - name: Collect candidate news
+        if: steps.cfg.outputs.generate == 'true'
         env:
           NAVER_CLIENT_ID: ${{ secrets.NAVER_CLIENT_ID }}
           NAVER_CLIENT_SECRET: ${{ secrets.NAVER_CLIENT_SECRET }}
@@ -75,6 +102,7 @@ jobs:
             || echo "collector unavailable — Claude will rely on WebSearch"
 
       - name: Write today's briefing with Claude
+        if: steps.cfg.outputs.generate == 'true'
         uses: anthropics/claude-code-action@v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
@@ -91,7 +119,7 @@ jobs:
             --allowedTools "Skill,WebSearch,WebFetch,Read,Write,Edit,Glob,Grep,Bash(python3:*),Bash(mkdir:*),Bash(cp:*),Bash(ls:*),Bash(cat:*),Bash(date:*),Bash(TZ=Asia/Seoul date:*)"
 
       - name: Send at 07:00 KST
-        if: ${{ hashFiles('out/newsletter.html') != '' && (github.event_name == 'schedule' || inputs.send) }}
+        if: ${{ steps.cfg.outputs.send == 'true' && hashFiles('out/newsletter.html') != '' && (github.event_name == 'schedule' || inputs.send) }}
         env:
           NEWSLETTER_TO: ${{ secrets.NEWSLETTER_TO }}
           GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
@@ -103,7 +131,7 @@ jobs:
             --wait-until 07:00
 
       - name: Summary
-        if: always()
+        if: always() && steps.cfg.outputs.generate == 'true'
         run: |
           if [ -f out/SKIPPED.md ]; then
             { echo "## 오늘은 발행하지 않음"; cat out/SKIPPED.md; } >> "$GITHUB_STEP_SUMMARY"
@@ -114,7 +142,7 @@ jobs:
           fi
 
       - name: Save archive
-        if: always()
+        if: always() && steps.cfg.outputs.generate == 'true'
         uses: actions/cache/save@v4
         with:
           path: archive
