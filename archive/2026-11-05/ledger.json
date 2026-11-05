@@ -1,0 +1,439 @@
+{
+  "issue_date": "2026-11-05",
+  "reference_time_kst": "2026-11-05 07:00 (사용자 지정 기준 시각, 실제 작업은 같은 날 오후)",
+  "window": {
+    "since_kst": "2026-11-04 07:00",
+    "until_kst": "2026-11-05 07:00",
+    "publish_gate": "실패 — 창 안 T1/T2 신규 사실 없음, 오늘 시세 확인 못 함, 예측을 바꿀 새 분석 없음",
+    "demo_since_kst": "2026-10-29 00:00",
+    "demo_until_kst": "2026-11-05 07:00",
+    "demo_note": "사용자 요청에 따라 발행 조건 미충족 시 10/29~11/5 07:00 실제 자료로 시연호를 만든다. 11/5 07:00 이후 자료(예: 11/5 장중 증시 움직임)는 쓰지 않는다."
+  },
+  "searches": {
+    "tier1": 8,
+    "tier2": 49,
+    "failed": 3,
+    "failed_note": "도메인 제한 오류 3회(mk.co.kr, yna.co.kr, reuters.com 포함 필터) — 필터를 바꿔 재검색함. WebFetch 2회(fntimes.com, ustockplus.com) 샌드박스 차단 → 재시도하지 않고 검색 교차 확인으로 대체",
+    "complete": true
+  },
+  "items": [
+    {
+      "id": "S1",
+      "title": "상장 카운트다운…패션 플랫폼 1위의 다음 도전 [무신사 IPO ①]",
+      "outlet": "한국금융신문",
+      "published_kst": "2026-10-30 22:49",
+      "url": "https://www.fntimes.com/html/view.php?ud=202610302249055219dd55077bc2_18",
+      "tier": "T2",
+      "topics": [
+        "IPO",
+        "실적",
+        "기업가치",
+        "사업"
+      ],
+      "key_facts": [
+        "시장 거론 기업가치 8조~10조 원, 9월 유가증권시장 예비심사 청구, 회사는 상장 요건·실익 검토 단계라고 설명",
+        "2026 상반기 연결 매출 8,217억 원(+22.5%), 영업이익 523억 원(-11.2%), 영업이익률 8.8% → 6.4%",
+        "상반기 매출 비중: 수수료 38.1%, 상품 23.8%, 제품 32.4%",
+        "중국 매장 운영, 일본 내년 매장 개점 준비, 대만 지사 설립, 필리핀·베트남 유통사 협력",
+        "오프라인 거점 확대 초기 투자비가 단기 수익성 부담이 될 수 있다는 회사 설명"
+      ],
+      "in_window": false,
+      "in_demo_window": true,
+      "verdict": "채택",
+      "use": "TOP5 후보",
+      "reason": "무신사 IPO 기획 1편 — 수익성(영업이익률)·매출 구조를 숫자로 정리. 원문 미열람(WebFetch 차단), 검색 결과 요약 기준",
+      "score": {
+        "importance": 4,
+        "relevance": 3,
+        "interest": 1,
+        "tier_adj": 0,
+        "total": 8
+      }
+    },
+    {
+      "id": "S2",
+      "title": "Musinsa helps homegrown brands fend off global fashion giants",
+      "outlet": "The Korea Times",
+      "published_kst": "2026-10-30",
+      "url": "https://www.koreatimes.co.kr/business/companies/20261030/musinsa-helps-homegrown-brands-fend-off-global-fashion-giants",
+      "tier": "T2",
+      "topics": [
+        "IPO",
+        "기업가치",
+        "사업"
+      ],
+      "key_facts": [
+        "국내 패션 유통시장에서 토종 브랜드 점유율 70.1%(유로모니터)",
+        "무신사가 약 10조 원 기업가치로 IPO 준비, 시장 추정 8조~10조 원",
+        "공모 자금은 주로 해외 물류망과 글로벌 마케팅에 사용 계획",
+        "2030년까지 해외 거래액 3조 원 목표",
+        "2015년부터 무이자 생산자금 누적 4,000억 원 이상 지원"
+      ],
+      "in_window": false,
+      "in_demo_window": true,
+      "verdict": "채택",
+      "use": "TOP5 후보",
+      "reason": "IPO 자금 사용처·해외 목표 등 성장 스토리. 70.1%는 딜사이트(S10)도 같은 수치 보도. 원문 미열람, 검색 결과 요약 기준",
+      "score": {
+        "importance": 3,
+        "relevance": 3,
+        "interest": 1,
+        "tier_adj": 0,
+        "total": 7
+      }
+    },
+    {
+      "id": "S3",
+      "title": "코너스톤투자자제도 13일 첫 시행…공모주 최대 10개월 의무 보유",
+      "outlet": "아시아경제",
+      "published_kst": "2026-11-03 14:17",
+      "url": "https://view.asiae.co.kr/article/2026110314175883941",
+      "tier": "T2",
+      "topics": [
+        "IPO",
+        "공모 구조",
+        "제도"
+      ],
+      "key_facts": [
+        "금융위, 11/3 국무회의에서 자본시장법 시행령 개정안 의결 → 11/13 시행",
+        "시행일 이후 증권신고서를 제출하는 IPO 기업부터 적용",
+        "코너스톤 배정 물량 보호예수: 50% 6개월, 30% 8개월, 20% 10개월",
+        "사전 배정 한도: 코스피 일반 기관 배정분의 20%(기관 1곳 10%), 코스닥 30%(20%)",
+        "참여 자격: 사전 청약 물량의 20배 이상 자기자본 또는 위탁재산, 대주주·특수관계인 등 이해관계 기관과 계약 금지",
+        "내년 코스피 상장을 목표로 하는 무신사 등이 활용할 수 있을 것으로 기대(보도)"
+      ],
+      "in_window": false,
+      "in_demo_window": true,
+      "verdict": "채택",
+      "use": "TOP5 후보",
+      "reason": "무신사 공모 구조·일정에 직접 영향 가능한 제도 확정. 서울경제(S4)·헤럴드경제(S5) 교차 확인. 무신사 언급 문장은 검색 요약 기준(원문 미열람)",
+      "score": {
+        "importance": 2,
+        "relevance": 2,
+        "interest": 2,
+        "tier_adj": 0,
+        "total": 6
+      }
+    },
+    {
+      "id": "S4",
+      "title": "공모주 사전배정 ‘코너스톤’ 13일 시행…시행령 국무회의 통과",
+      "outlet": "서울경제",
+      "published_kst": "2026-11-03",
+      "url": "https://www.sedaily.com/article/20109624",
+      "tier": "T2",
+      "topics": [
+        "IPO",
+        "제도"
+      ],
+      "key_facts": [
+        "11/3 국무회의 의결, 11/13 시행",
+        "보호예수 50% 6개월·30% 8개월·20% 10개월",
+        "코스피 20%·코스닥 30% 한도"
+      ],
+      "in_window": false,
+      "in_demo_window": true,
+      "verdict": "배경",
+      "use": "교차 확인",
+      "reason": "S3와 같은 사건(중복) — S3 대표. 무신사 언급 미확인",
+      "score": null
+    },
+    {
+      "id": "S5",
+      "title": "공모주 상장 직후 ‘매물 폭탄’ 막는다…IPO 공모주 사전 배정 ‘코너스톤투자자 제도’ 13일 시행",
+      "outlet": "헤럴드경제",
+      "published_kst": "날짜 불명(11/3~11/4 추정)",
+      "url": "https://biz.heraldcorp.com/article/10924261",
+      "tier": "T2",
+      "topics": [
+        "IPO",
+        "제도"
+      ],
+      "key_facts": [
+        "코너스톤 제도 13일 시행"
+      ],
+      "in_window": false,
+      "in_demo_window": null,
+      "verdict": "배경",
+      "use": "교차 확인",
+      "reason": "S3와 같은 사건(중복), 발행일 미확인",
+      "score": null
+    },
+    {
+      "id": "S6",
+      "title": "새내기주 부진한 IPO시장… ‘옥석 가리기’ 본격화",
+      "outlet": "파이낸셜뉴스",
+      "published_kst": "2026-11-04 18:25",
+      "url": "https://www.fnnews.com/news/202611041825265383",
+      "tier": "T2",
+      "topics": [
+        "IPO 시장"
+      ],
+      "key_facts": [
+        "(검색 요약) 금융당국이 전날 코너스톤 관련 시행령 개정안을 국무회의에서 의결했다고 언급"
+      ],
+      "in_window": true,
+      "in_demo_window": true,
+      "verdict": "배경",
+      "use": "시장 분위기 참고",
+      "reason": "24시간 창 안 유일한 T2 후보지만 IPO 시장 일반 기사이고 본문의 무신사 언급을 확인하지 못함(sources.md §1: 무신사가 본문에 나올 때만 출처로 사용). 발행 조건 미충족",
+      "score": null
+    },
+    {
+      "id": "S7",
+      "title": "새내기주 따상 찍고 급락 사라질까…코너스톤 제도 13일 시행",
+      "outlet": "한국경제",
+      "published_kst": "2026-11-05 (시각 불명)",
+      "url": "https://www.hankyung.com/article/2026110569716",
+      "tier": "T2",
+      "topics": [
+        "IPO",
+        "제도"
+      ],
+      "key_facts": [
+        "코너스톤 제도 13일 시행"
+      ],
+      "in_window": null,
+      "in_demo_window": null,
+      "verdict": "탈락",
+      "use": null,
+      "reason": "11/5 발행 시각을 확인할 수 없어 기준 시각(07:00) 이후일 가능성 — 사용하지 않음. S3와 같은 사건, 무신사 언급 미확인",
+      "score": null
+    },
+    {
+      "id": "S8",
+      "title": "Korea Launches Cornerstone Investor System for IPOs on the 13th",
+      "outlet": "Seoul Economic Daily (영문)",
+      "published_kst": "2026-11-03",
+      "url": "https://en.sedaily.com/finance/2026/11/03/korea-launches-cornerstone-investor-system-for-ipos-on-the",
+      "tier": "T2",
+      "topics": [
+        "IPO",
+        "제도"
+      ],
+      "key_facts": [
+        "코너스톤 제도 13일 시행"
+      ],
+      "in_window": false,
+      "in_demo_window": true,
+      "verdict": "배경",
+      "use": "교차 확인",
+      "reason": "S4의 영문판 — 같은 매체이므로 독립 출처로 세지 않음",
+      "score": null
+    },
+    {
+      "id": "S9",
+      "title": "IPO 공모주 '단타' 막는다…코너스톤 투자자 제도 13일 시행",
+      "outlet": "네이트 뉴스(원 매체 미확인)",
+      "published_kst": "2026-11-03",
+      "url": "https://m.news.nate.com/view/20261103n27179",
+      "tier": "T2",
+      "topics": [
+        "IPO",
+        "제도"
+      ],
+      "key_facts": [
+        "코너스톤 제도 13일 시행"
+      ],
+      "in_window": false,
+      "in_demo_window": true,
+      "verdict": "배경",
+      "use": "교차 확인",
+      "reason": "S3와 같은 사건(중복), 포털 전재로 원 매체 미확인",
+      "score": null
+    },
+    {
+      "id": "S10",
+      "title": "韓 인디 브랜드 비중 세계 1위…무신사, K패션 생태계 성장 견인",
+      "outlet": "딜사이트",
+      "published_kst": "날짜 불명(검색 메타데이터상 10월 말)",
+      "url": "https://dealsite.co.kr/articles/171583",
+      "tier": "T2",
+      "topics": [
+        "사업"
+      ],
+      "key_facts": [
+        "토종 브랜드 점유율 70.1%(유로모니터)",
+        "국내 인디 브랜드 비중 37%(중국 23%, 일본 18%, 미국 14%)"
+      ],
+      "in_window": false,
+      "in_demo_window": null,
+      "verdict": "배경",
+      "use": "교차 확인",
+      "reason": "S2와 같은 유로모니터 자료(같은 사건). 정확한 발행일 미확인",
+      "score": null
+    },
+    {
+      "id": "S11",
+      "title": "무신사 IPO, 10조원은 무엇을 사는 가격인가",
+      "outlet": "플래텀",
+      "published_kst": "날짜 불명",
+      "url": "https://platum.kr/archives/294160",
+      "tier": "T3",
+      "topics": [
+        "기업가치"
+      ],
+      "key_facts": [
+        "10조 원 = 2025년 매출의 약 6.8배·영업이익의 약 71배·EBITDA의 약 40배(칼럼 계산)",
+        "부채비율 812.4%(칼럼 인용)"
+      ],
+      "in_window": false,
+      "in_demo_window": null,
+      "verdict": "배경",
+      "use": "해석 참고",
+      "reason": "발행일 확인 불가 → 창 밖으로 처리. 본문 수치로 쓰지 않음",
+      "score": null
+    },
+    {
+      "id": "S12",
+      "title": "[무신사 IPO] 소요한남 계약 부진에 조만호 지분담보 리스크 커져…사재 투입 촉각",
+      "outlet": "딜사이트",
+      "published_kst": "날짜 불명(검색 메타데이터상 10월 중순)",
+      "url": "https://dealsite.co.kr/articles/170306",
+      "tier": "T2",
+      "topics": [
+        "지배구조"
+      ],
+      "key_facts": [
+        "라펠 소요한남 정당계약률 20%대",
+        "담보 전량 실행 시 조만호 지분율 51.75% → 38.47%(상반기 말 기준)",
+        "담보 정리 방안을 내고 조건부로 통과하는 방안이 업계에서 거론(검색 요약)"
+      ],
+      "in_window": false,
+      "in_demo_window": false,
+      "verdict": "배경",
+      "use": "유지보수 메모",
+      "reason": "7일 범위 밖으로 추정, 정확한 발행일 미확인. context.md(38.6%)와 수치 차이 → 유지보수 메모",
+      "score": null
+    }
+  ],
+  "references": [
+    {
+      "id": "R1",
+      "fact": "2026-09-07 코스피 상장예비심사 청구, 상장 예정 227,829,016주·공모 26,600,000주, 결과 통보 보도 없음(11/5 07:00 기준 검색에서도 승인·보완 보도 없음)",
+      "from": "context.md §1·§2 + 오늘 검색",
+      "url": "https://news.mtn.co.kr/news-detail/2026090718165325080",
+      "tier": "T2"
+    },
+    {
+      "id": "R2",
+      "fact": "주관사: 대표 한국투자증권·씨티, 공동 KB증권·JP모건",
+      "from": "context.md §1",
+      "url": "https://www.hankyung.com/article/2026090794401",
+      "tier": "T2"
+    },
+    {
+      "id": "R3",
+      "fact": "현재 발행주식 204,629,016주(RCPS 전량 보통주 전환 후)",
+      "from": "context.md §1",
+      "url": "https://dealsite.co.kr/articles/170386",
+      "tier": "T2"
+    },
+    {
+      "id": "R4",
+      "fact": "2026-10-29 Npay 비상장 체결 평균가 22,800원(단일 출처, 오늘 페이지 재확인 불가)",
+      "from": "context.md §5",
+      "url": "https://www.ustockplus.com/stock/musinsa-458860",
+      "tier": "T2"
+    },
+    {
+      "id": "R5",
+      "fact": "2026-09-10 Npay 비상장에서 주당 26,800원에 거래(9/3 기준가 21,500원 대비 +24.7%), 가격 종류 명시 없음",
+      "from": "context.md §5 + 오늘 검색",
+      "url": "https://www.hankyung.com/article/202609119003i",
+      "tier": "T2"
+    },
+    {
+      "id": "R6",
+      "fact": "2026 상반기 연결 매출 8,217억 원(+22.5%), 영업이익 523억 원(-11.2%), 순손실 156억 원",
+      "from": "context.md §4 + 오늘 검색(S1, Korea Herald)",
+      "url": "https://news.mtn.co.kr/news-detail/2026083110455493709",
+      "tier": "T2"
+    },
+    {
+      "id": "R7",
+      "fact": "거론 기업가치: 공모 때 8조 원 안팎, 내부 최대 10조 원, 증권가 7~9조 원(단일)",
+      "from": "context.md §3",
+      "url": "https://www.imaeil.com/page/view/2026091509303094401",
+      "tier": "T2"
+    },
+    {
+      "id": "R8",
+      "fact": "IBK투자증권: 8조 원 넘기려면 추가 실적·사업구조 확인 필요. 비교기업 EV/EBITDA 방식 1.6~6.4조, 거래액·매출 멀티플 7.6~9조 원",
+      "from": "context.md §3 + 오늘 검색(Korea Times 10/20, Korea Herald)",
+      "url": "https://www.koreatimes.co.kr/business/companies/20261020/musinsa-sono-international-face-ipo-uncertainty-amid-market-volatility",
+      "tier": "T2"
+    },
+    {
+      "id": "R9",
+      "fact": "2026년 승인 기업 평균 심사 61.7영업일, 대형 코스피 승인→증권신고서 제출 1~3일(케이뱅크 1일·LG CNS 3일), 승인→상장 52~65일(케이뱅크·LG CNS), 신고서→상장 38~62일",
+      "from": "forecasting.md §2-1",
+      "url": null,
+      "tier": "T2"
+    },
+    {
+      "id": "R10",
+      "fact": "대형 코스피 첫날 선례: LG CNS -9.85%, 케이뱅크 +0.4%(6주 뒤 -24%). 10월 상장 9곳 중 5곳이 10/30 종가 기준 공모가 하회",
+      "from": "forecasting.md §4-2",
+      "url": null,
+      "tier": "T2"
+    },
+    {
+      "id": "R11",
+      "fact": "45영업일 명목 기한 약 11/12~16(추석·대체공휴일 반영, 보완 기간 제외) — 추정",
+      "from": "context.md §2",
+      "url": null,
+      "tier": "추정"
+    },
+    {
+      "id": "R12",
+      "fact": "서울지방국세청 특별세무조사(2026-08-21 착수) 결과·추징 발표 없음, 공정위 대규모유통업법 조사 진행 중",
+      "from": "context.md §7 + 오늘 검색",
+      "url": "https://www.fnnews.com/news/202609071814540303",
+      "tier": "T2"
+    },
+    {
+      "id": "R13",
+      "fact": "2026년 매출 1.8조 원 안팎(IBK 전망). 작년 3분기 실적은 2025-11-25 공개",
+      "from": "context.md §3·§4 + 오늘 검색",
+      "url": "https://newsroom.musinsa.com/newsroom-menu/2025-1125-2",
+      "tier": "T1"
+    },
+    {
+      "id": "R14",
+      "fact": "최대주주·특수관계인 상장 후 6개월 의무보유. RSU 주식의 의무보유 해당 여부는 미확인 — 증권신고서 의무보유 표와 개인 약정으로 확인",
+      "from": "context.md §6·§8, forecasting.md §4-1",
+      "url": null,
+      "tier": "T2"
+    },
+    {
+      "id": "R15",
+      "fact": "8조 원 ÷ 227,829,016주 ≈ 35,100원, 7조 ≈ 30,700원, 9조 ≈ 39,500원(단순 환산)",
+      "from": "context.md §3 (계산)",
+      "url": null,
+      "tier": "추정"
+    },
+    {
+      "id": "R16",
+      "fact": "기준 예측(첫 실행용): 상장 기본 2027년 2~3월·낙관 1월 하순·비관 2분기 이후 / 공모가 7~9조 원 → 주당 약 30,700~39,500원(할인 전) / 첫날 기본 ±15%·약세 -10~-25%·강세 +30% 이상",
+      "from": "context.md §10",
+      "url": null,
+      "tier": "추정"
+    },
+    {
+      "id": "R17",
+      "fact": "대형 코스피 IPO 할인율 참고값: LG CNS 30.7~39.9%",
+      "from": "forecasting.md §3-1",
+      "url": null,
+      "tier": "T2"
+    }
+  ],
+  "rejected_counts": {
+    "창 밖(7일 초과)": 96,
+    "날짜 불명": 14,
+    "무관·소비자 언급": 21,
+    "중복(같은 사건·받아쓰기)": 9,
+    "내용 미확인(제목·요약만 노출)": 3
+  },
+  "rejected_note": "검색 결과 링크 기준 대략치. 창 밖 대표 예: 9/7 예심 청구 기사 묶음, 9/14 장외 몸값 기사, 10/20 Korea Times, 10월 초 Korea Herald·JoongAng 분석. 소비자 언급 대표 예: 블랙프라이데이·매장 오픈·할인 안내"
+}
