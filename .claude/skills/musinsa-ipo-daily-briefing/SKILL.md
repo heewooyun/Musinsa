@@ -226,8 +226,10 @@ description: >-
 
 ### Step 9 · 발송과 보관
 - **예약 발송**: `python3 scripts/send_email.py --html out/newsletter.html --text out/newsletter.txt --subject-file out/subject.txt --wait-until 07:00`
-  (수신자는 `NEWSLETTER_TO`). exit 2면 자격증명·수신자 문제를 보고하고, exit 3이면 한 번만 재시도한 뒤 보고한다.
-  어느 경우에도 파일은 남겨 둔다.
+  (수신자는 `NEWSLETTER_TO`). `--wait-until`은 07:00 KST 전이면 그때까지 기다렸다 보낸다(최대 90분). Claude Code의 Bash 도구는
+  보통 10분이면 시간 초과되므로, 07:00까지 10분 넘게 남았으면 이 명령을 백그라운드로 실행한다. 백그라운드 실행이 안 되는
+  환경이면 기다리지 말고 바로 보낸다 — 조금 이른 메일이 안 간 메일보다 낫다. GitHub Actions의 발송 단계는 시간 제한이 없어 그대로 쓴다.
+  exit 2면 자격증명·수신자 문제를 보고하고, exit 3이면 한 번만 재시도한 뒤 보고한다. 어느 경우에도 파일은 남겨 둔다.
 - **생성 전용**: 파일만 저장하고 끝낸다. **미리보기**: 경로를 알려 주고, 사용자가 원하면 발송한다.
 - `archive/`가 있으면 `archive/YYYY-MM-DD/`에 `briefing.json`, `newsletter.html`, `ledger.json`, `debate_log.md`를 복사한다
   (커밋 여부는 러너가 정한다).
