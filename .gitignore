@@ -1,0 +1,6 @@
+out/
+archive/
+__pycache__/
+*.pyc
+*-workspace/
+.DS_Store

@@ -1,0 +1,10 @@
+schema_version: "1.1"
+name: filters-noise-and-corrects-facts
+expected_outcome: |
+  The skill publishes a newsletter from the synthetic candidate list only. It excludes the three consumer-only items
+  (Black Friday discount, new padded-jacket collection, delivery complaints), merges the two copies of the same
+  preliminary-review story, does not present the September 7 filing article as new news, does not state the wrong
+  "2025 revenue 2조 원" figure as fact (Red corrects or excludes it using the reference context), and mentions the
+  community "12월 15일 상장 확정" post only as an unverified rumor if at all. No email is sent.
+context:
+  scaffold_script: place-files.sh

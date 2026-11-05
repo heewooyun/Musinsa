@@ -1,0 +1,8 @@
+schema_version: "1.1"
+name: live-daily-briefing-preview
+expected_outcome: |
+  With live web search, the skill either publishes today's newsletter (out/newsletter.html rendered with ok:true from
+  out/briefing.json) or, if nothing new and meaningful was found, writes out/SKIPPED.md with reasons. A published issue has a
+  300-500 character expert opinion covering price trend, listing timing, offering price and earnings outlook with forecasts
+  labeled as predictions, five relevant sourced articles, glossary annotations, Red's fact-check, and four persona scores of
+  9 or more recorded in out/debate_log.md. No email is sent.

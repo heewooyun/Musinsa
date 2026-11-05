@@ -1,0 +1,130 @@
+# 무신사 장외일보 — 매일 아침 생성하고 07:00 KST에 메일로 보낸다.
+#
+# 필요한 저장소 Secrets (Settings → Secrets and variables → Actions):
+#   NEWSLETTER_TO            받는 주소 (공개 레포이므로 주소를 파일에 적지 않고 여기에 둔다)
+#   CLAUDE_CODE_OAUTH_TOKEN  `claude setup-token`으로 만든 토큰 (Pro/Max 구독)   ─┐ 둘 중 하나
+#   ANTHROPIC_API_KEY        Anthropic API 키 (사용량만큼 과금)                   ─┘
+#   GMAIL_ADDRESS            보내는 Gmail 주소                                     ─┐ 둘 중 하나
+#   GMAIL_APP_PASSWORD       Gmail 앱 비밀번호(16자리)                               │
+#   RESEND_API_KEY           (대신) Resend API 키                                  ─┘
+#   NAVER_CLIENT_ID / NAVER_CLIENT_SECRET  (선택) 네이버 뉴스 검색 API — 수집 품질 향상
+#
+# 예약 실행은 기본 브랜치에 있는 이 파일로만 동작한다.
+
+name: 무신사 장외일보
+
+on:
+  schedule:
+    # GitHub cron은 UTC. 21:10 UTC = 06:10 KST. 생성에 20~40분, 발송 단계가 07:00 KST까지 기다렸다 보낸다.
+    - cron: '10 21 * * *'
+  workflow_dispatch:
+    inputs:
+      send:
+        description: '메일 발송 (끄면 생성만 하고 메일은 보내지 않음)'
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: musinsa-daily-briefing
+  cancel-in-progress: false
+
+jobs:
+  briefing:
+    runs-on: ubuntu-latest
+    timeout-minutes: 80
+    env:
+      TZ: Asia/Seoul
+      SKILL_DIR: .claude/skills/musinsa-ipo-daily-briefing
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install jinja2
+
+      # 지난 발행본은 레포에 커밋하지 않고(공개 레포) Actions 캐시에만 보관한다.
+      - name: Restore archive
+        uses: actions/cache/restore@v4
+        with:
+          path: archive
+          key: musinsa-archive-${{ github.run_id }}
+          restore-keys: musinsa-archive-
+
+      - name: Prepare folders and prune archive (keep 30 days)
+        run: |
+          mkdir -p out archive
+          cutoff=$(date -d '30 days ago' +%F)
+          for d in archive/*/; do
+            [ -d "$d" ] || continue
+            n=$(basename "$d")
+            if [[ "$n" < "$cutoff" ]]; then rm -rf "$d"; fi
+          done
+
+      - name: Collect candidate news
+        env:
+          NAVER_CLIENT_ID: ${{ secrets.NAVER_CLIENT_ID }}
+          NAVER_CLIENT_SECRET: ${{ secrets.NAVER_CLIENT_SECRET }}
+        run: |
+          python3 "$SKILL_DIR/scripts/collect_news.py" --since-hours 24 --out out/candidates.json \
+            || echo "collector unavailable — Claude will rely on WebSearch"
+
+      - name: Write today's briefing with Claude
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          prompt: |
+            .claude/skills/musinsa-ipo-daily-briefing/SKILL.md 를 읽고 그 절차대로 오늘자 '무신사 장외일보'를 만들어 줘.
+            - 실행 모드: 생성 전용. 메일은 보내지 마. 발송은 다음 워크플로 단계가 맡아.
+            - 결과 파일은 out/ 에 저장해. out/candidates.json 이 있으면 후보 목록으로 써.
+            - 지난 발행본은 archive/ 에 있어. 발행하면 Step 9대로 archive/YYYY-MM-DD/ 에 복사해.
+            - 새 소식이 없으면 out/SKIPPED.md 만 남기고 끝내.
+          claude_args: |
+            --max-turns 150
+            --allowedTools "Skill,WebSearch,WebFetch,Read,Write,Edit,Glob,Grep,Bash(python3:*),Bash(mkdir:*),Bash(cp:*),Bash(ls:*),Bash(cat:*),Bash(date:*),Bash(TZ=Asia/Seoul date:*)"
+
+      - name: Send at 07:00 KST
+        if: ${{ hashFiles('out/newsletter.html') != '' && (github.event_name == 'schedule' || inputs.send) }}
+        env:
+          NEWSLETTER_TO: ${{ secrets.NEWSLETTER_TO }}
+          GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+        run: |
+          python3 "$SKILL_DIR/scripts/send_email.py" \
+            --html out/newsletter.html --text out/newsletter.txt --subject-file out/subject.txt \
+            --wait-until 07:00
+
+      - name: Summary
+        if: always()
+        run: |
+          if [ -f out/SKIPPED.md ]; then
+            { echo "## 오늘은 발행하지 않음"; cat out/SKIPPED.md; } >> "$GITHUB_STEP_SUMMARY"
+          elif [ -f out/subject.txt ]; then
+            { echo "## 발행"; cat out/subject.txt; } >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "## 결과 파일 없음 — 로그를 확인하세요" >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Save archive
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: archive
+          key: musinsa-archive-${{ github.run_id }}
+
+      # 실패한 날만 디버깅용으로 올린다. 공개 레포의 Artifact는 다른 사람도 내려받을 수 있다.
+      - name: Upload files on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: briefing-${{ github.run_id }}
+          path: out/
+          retention-days: 3

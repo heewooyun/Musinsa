@@ -1,0 +1,8 @@
+schema_version: "1.1"
+name: skips-when-no-meaningful-news
+expected_outcome: |
+  Every candidate is either a consumer/shopping mention, an old article outside the 24-hour window, or community chatter
+  with no new facts, so the skill does not publish: no out/newsletter.html, an out/SKIPPED.md that lists what was checked
+  and why each candidate was rejected, and no email.
+context:
+  scaffold_script: place-files.sh
