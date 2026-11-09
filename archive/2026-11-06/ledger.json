@@ -1,0 +1,41 @@
+{
+  "window": {"since_kst": "2026-11-05 06:10", "until_kst": "2026-11-06 06:10"},
+  "searches": {"tier1": 8, "tier2": 4, "failed": 0, "complete": true, "collector": "collect_news.py exit 4 (naver 자격증명 없음, google_news 프록시 403) → WebSearch만 사용"},
+  "items": [
+    {
+      "id": "S1",
+      "title": "\"와디즈 펀딩 2만% 달성\"…부스터즈 '기픈', 무신사 뷰티 1위",
+      "outlet": "머니투데이",
+      "published_kst": "2026-11-05",
+      "url": "https://www.mt.co.kr/index.php/stock/2026/11/05/2026110510035391230",
+      "tier": "T2",
+      "topics": ["입점 브랜드 랭킹"],
+      "key_facts": ["입점 브랜드 제품이 무신사 뷰티 실시간 랭킹 1위"],
+      "in_window": true,
+      "verdict": "탈락",
+      "use": null,
+      "reason": "무신사가 주체가 아님 · 소비자 언급(랭킹)만 있고 주제 키워드 없음",
+      "score": null
+    },
+    {
+      "id": "S2",
+      "title": "Musinsa helps homegrown brands fend off global fashion giants",
+      "outlet": "The Korea Times",
+      "published_kst": "2026-10-30",
+      "url": "https://www.koreatimes.co.kr/business/companies/20261030/musinsa-helps-homegrown-brands-fend-off-global-fashion-giants",
+      "tier": "T2",
+      "topics": ["IPO", "사업"],
+      "key_facts": ["IPO 자금이 글로벌 확장 재원이 될 것"],
+      "in_window": false,
+      "verdict": "배경",
+      "use": null,
+      "reason": "창 밖 · 11/5호에서 이미 소개",
+      "score": null
+    }
+  ],
+  "references": [
+    {"id": "R1", "fact": "2026-10-29 Npay 비상장 체결 평균가 22,800원", "from": "context.md §5", "url": "https://www.ustockplus.com/stock/musinsa-458860", "tier": "T4/플랫폼"},
+    {"id": "R2", "fact": "2026-09-07 코스피 상장예비심사 청구", "from": "context.md §2", "url": "https://news.mtn.co.kr/news-detail/2026090718165325080", "tier": "T2"}
+  ],
+  "rejected_counts": {"창 밖(7일 초과, 9월 예심 청구·장외가 기사 등)": 38, "날짜 불명": 6, "무관·소비자 언급": 9, "중복": 14}
+}
