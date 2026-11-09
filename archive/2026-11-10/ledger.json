@@ -1,0 +1,10 @@
+{
+  "window": {"since_kst": "2026-11-06 06:10", "until_kst": "2026-11-10 06:10"},
+  "searches": {"tier1": 8, "tier2": 4, "failed": 0, "complete": true, "collector": "미사용 (직전 실행에서 exit 4 확인) → WebSearch만 사용"},
+  "items": [],
+  "references": [
+    {"id": "R1", "fact": "2026-10-29 Npay 비상장 체결 평균가 22,800원", "from": "context.md §5", "url": "https://www.ustockplus.com/stock/musinsa-458860", "tier": "T4/플랫폼"},
+    {"id": "R2", "fact": "2026-09-07 코스피 상장예비심사 청구", "from": "context.md §2", "url": "https://news.mtn.co.kr/news-detail/2026090718165325080", "tier": "T2"}
+  ],
+  "rejected_counts": {"창 밖(7일 초과)": 72, "날짜 불명": 9, "무관·소비자 언급": 11, "중복": 28}
+}
