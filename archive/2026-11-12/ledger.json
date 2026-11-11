@@ -1,0 +1,19 @@
+{
+  "window": {"since_kst": "2026-11-11 06:10", "until_kst": "2026-11-12 06:10"},
+  "searches": {"tier1": 8, "tier2": 7, "failed": 0, "complete": true, "collector": "미사용(이 환경에서 exit 4) → WebSearch만"},
+  "items": [
+    {"id": "S1", "title": "공모가 거품 잡힐까…IPO 새 제도 앞두고 무신사·리벨리온 '주목'", "outlet": "글로벌이코노믹", "published_kst": "2026-11-11 15:03", "url": "https://www.g-enews.com/article/Securities/2026/11/20261111150303314153ddfb15a_1", "tier": "T2",
+     "topics": ["IPO 제도", "코너스톤", "사전수요예측"], "key_facts": ["13일 사전수요예측·코너스톤 제도 시행, 주관사가 선택적으로 활용 → 내년 상장 준비 기업(무신사 등)이 시험대", "공모가가 높으면 기관을 미리 확보해도 상장 후 하락을 막기 어렵다는 실효성 우려", "기사 안 '당초 5월 계획했던 예비심사 청구는 연말로 미뤄졌다'는 문장은 9/7 청구(R2)와 어긋남 — 낡은 문장 의심"],
+     "in_window": true, "verdict": "배경", "use": "팩트체크 대상(오류 의심 문장)", "reason": "제도 시행은 11/3 의결·11/5호 소개 내용의 재탕, 무신사 관련 새 사실 없음, 예측 변경 요인 아님", "score": null},
+    {"id": "S2", "title": "\"공모가 거품부터 빼야\"…코너스톤 도입해도 IPO 흥행 '갸웃'", "outlet": "데일리안", "published_kst": "날짜 미확인(11/9 이후 추정)", "url": "https://www.dailian.co.kr/news/view/1713233/%EA%B3%B5%EB%AA%A8-%EA%B1%B0%ED%92%88-%EB%B9%BC%EC%95%BC%EC%BD%94%EB%84%88%EC%8A%A4%ED%86%A4-%EB%8F%84%EC%9E%85%ED%95%B4%EB%8F%84-IP-2026", "tier": "T2", "topics": ["IPO 제도"], "key_facts": ["코너스톤 도입 효과에 회의적 시각(제목 기준)"], "in_window": false, "verdict": "배경", "use": null, "reason": "날짜 미확인, 무신사 언급 여부 미확인", "score": null},
+    {"id": "S3", "title": "“상장 전 몸값 높인다”…무신사, 글로벌 영토 확장 승부수", "outlet": "이데일리", "published_kst": "2026-11-10(본문 '10일 유통업계에 따르면', 검색 요약 기준)", "url": "https://edaily.co.kr/News/Read?mediaCodeNo=257&newsId=05474326645644408", "tier": "T2", "topics": ["IPO 일정"], "key_facts": ["무신사는 오는 13일까지 코스피 예비심사 결과를 통보받을 예정(업계 전언)", "45영업일 원칙, 보완·추가 심사 시 연장 가능"], "in_window": false, "verdict": "배경", "use": null, "reason": "규정상 기한(R4 11/12~16, 레드 계산 11/13)의 재서술 — 새 사실 아님. 11/11 창 안 자료였으나 11/11호 검색에서 걸리지 않음", "score": null},
+    {"id": "S4", "title": "무신사 뷰티 성수 오픈", "outlet": "한국경제", "published_kst": "2026-11-11", "url": "https://www.hankyung.com/article/2026111109181", "tier": "T2", "topics": ["매장 개점"], "key_facts": ["11/11 무신사 뷰티 성수 개점(100호점)"], "in_window": true, "verdict": "탈락", "use": null, "reason": "매장 개점 단신(소비자 언급) · 11/9 발표를 11/11호에서 다룸", "score": null},
+    {"id": "S5", "title": "[IB토마토] 무신사, 힘 못 쓰는 장외 시총…IPO 가능성 의구심", "outlet": "IB토마토", "published_kst": "2024-03-12", "url": "https://www.ibtomato.com/ExternalView.aspx?type=1&no=11740", "tier": "T2", "topics": ["장외 시세"], "key_facts": ["2024년 기사"], "in_window": false, "verdict": "탈락", "use": null, "reason": "2024년 자료", "score": null}
+  ],
+  "references": [
+    {"id": "R1", "fact": "2026-10-29 Npay 비상장 체결 평균가 22,800원", "from": "context.md §5", "url": "https://www.ustockplus.com/stock/musinsa-458860", "tier": "플랫폼(단일)"},
+    {"id": "R2", "fact": "2026-09-07 코스피 상장예비심사 청구", "from": "context.md §2", "url": "https://news.mtn.co.kr/news-detail/2026090718165325080", "tier": "T2(확인)"},
+    {"id": "R4", "fact": "45영업일 규정상 기한 약 11/12~16", "from": "context.md §2", "url": null, "tier": "추정"}
+  ],
+  "rejected_counts": {"창 밖(7일 초과)": 88, "날짜 불명": 10, "무관·소비자 언급": 7, "중복": 26}
+}
