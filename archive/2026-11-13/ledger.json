@@ -1,0 +1,13 @@
+{
+  "window": {"since_kst": "2026-11-12 06:10", "until_kst": "2026-11-13 06:10"},
+  "searches": {"tier1": 8, "tier2": 4, "failed": 0, "complete": true, "collector": "미사용(exit 4 환경)", "price_pages": "www.ustockplus.com·www.seoulexchange.kr 접속 시도 → 프록시 정책 거부(403 CONNECT), 시세 직접 확인 불가"},
+  "items": [
+    {"id": "S1", "title": "“상장 전 몸값 높인다”…무신사, 글로벌 영토 확장 승부수", "outlet": "이데일리", "published_kst": "2026-11-10(본문 '10일 유통업계에 따르면', 검색 요약 기준)", "url": "https://edaily.co.kr/News/Read?mediaCodeNo=257&newsId=05474326645644408", "tier": "T2", "topics": ["IPO 일정"], "key_facts": ["오는 13일까지 예비심사 결과 통보 예정(업계 전언)", "순조로우면 연내 공모·내년 초 상장 유력(같은 계열 보도)"], "in_window": false, "verdict": "배경", "use": null, "reason": "창 밖(11/10), 11/12 기록에서 이미 다룸", "score": null},
+    {"id": "S2", "title": "(무신사 스탠다드 타임스퀘어 영등포점 확장 리오프닝)", "outlet": "검색 요약(코리안센터 등)", "published_kst": "날짜 미확인", "url": "https://www.koreancenter.or.kr/news/articleView.html?idxno=1437020", "tier": "T3", "topics": ["매장·할인"], "key_facts": ["11/12 리오프닝·할인 이벤트(연도 미확인)"], "in_window": false, "verdict": "탈락", "use": null, "reason": "소비자 언급(할인·이벤트)만, 날짜 미확인", "score": null}
+  ],
+  "references": [
+    {"id": "R1", "fact": "2026-10-29 Npay 비상장 체결 평균가 22,800원", "from": "context.md §5", "url": "https://www.ustockplus.com/stock/musinsa-458860", "tier": "플랫폼(단일)"},
+    {"id": "R2", "fact": "2026-09-07 코스피 상장예비심사 청구", "from": "context.md §2", "url": "https://news.mtn.co.kr/news-detail/2026090718165325080", "tier": "T2(확인)"}
+  ],
+  "rejected_counts": {"창 밖(7일 초과)": 90, "날짜 불명": 9, "무관·소비자 언급": 6, "중복": 30}
+}
