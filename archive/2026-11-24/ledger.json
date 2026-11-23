@@ -1,0 +1,11 @@
+{
+  "window": {"since_kst": "2026-11-20 06:10", "until_kst": "2026-11-24 06:10"},
+  "searches": {"tier1": 8, "tier2": 8, "failed": 0, "complete": true, "note": "11/20 메모에 따라 2단계를 기본 실행(기사형·매체명·실적 쿼리 포함)", "collector": "미사용(exit 4 환경)", "price_pages": "ustockplus 차단 지속", "fetch": "newstopkorea·investchosun·fntimes 차단 지속"},
+  "items": [],
+  "references": [
+    {"id": "R1", "fact": "2026-10-29 Npay 비상장 체결 평균가 22,800원", "from": "context.md §5", "url": "https://www.ustockplus.com/stock/musinsa-458860", "tier": "플랫폼(단일)"},
+    {"id": "R2", "fact": "2026-09-07 코스피 상장예비심사 청구", "from": "context.md §2", "url": "https://news.mtn.co.kr/news-detail/2026090718165325080", "tier": "T2(확인)"},
+    {"id": "R3", "fact": "2025년 3분기 실적은 2025-11-25 공시(매출 3,024억·영업이익 118억)", "from": "context.md §4", "url": "https://www.edaily.co.kr/News/Read?mediaCodeNo=257&newsId=04145926642369328", "tier": "T2"}
+  ],
+  "rejected_counts": {"창 밖(7일 초과 또는 11/20 이전, 기존 기록에 반영된 11/13·11/17 기사 포함)": 141, "날짜 불명": 10, "무관·소비자 언급": 6, "중복": 44}
+}
